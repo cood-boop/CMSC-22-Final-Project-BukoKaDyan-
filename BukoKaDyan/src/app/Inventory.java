@@ -1,6 +1,8 @@
 package app;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Inventory {
 	private HashMap<Product, Integer> inventory = new HashMap<>();
@@ -61,4 +63,16 @@ public class Inventory {
 	 * save the infomation on product stocks and their information
 	 * */
 
+	
+	public Set<Product> keySet() {
+		return inventory.keySet();
+	}
+
+	public int get(Product p) {
+		return inventory.get(p);
+	}
+
+	public ArrayList<Product> getProductList() {
+		return new ArrayList<>(inventory.keySet());
+	}
 }
