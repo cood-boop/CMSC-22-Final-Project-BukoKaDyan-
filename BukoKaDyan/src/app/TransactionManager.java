@@ -8,23 +8,33 @@ import java.nio.file.Path;
 //import java.io;
 
 public class TransactionManager{
+  private ProductDatabase database;
+  private Inventory inventory; 
   private HashMap<String, Receipt> transactionHistory = new HashMap<>();
 
-  public TransactionManager(){
+  public TransactionManager(ProductDatabase database, Inventory inventory){
     //loadHistory();
+	  this.database = database;
+	  this.inventory = inventory;
   }
 
   public void newTransaction(Inventory inventory){
-    Receipt receipt = new Receipt();
+    Receipt receipt = new Receipt(null, null);
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter buyer name:");
     String name = sc.nextLine();
-    ArrayList<Product> productList = new ArrayList<>(inventory.keySet());
+    ArrayList<Product> productList = new ArrayList<>();
+    for (String productName : inventory.getInventory().keySet()) {
+        Product product = database.getByName(productName);
+        if (product != null) {
+            productList.add(product);
+        }
+    }
 
     while(true){ //implement terminal ui first here
       //show product list here
       int i = 1;
-      for(Product key: inventory.keySet()){
+      for(Product key: productList){
         System.out.println("[" + i + "] " + key.getName() + "\t|" + key.getPrice() + "\t|" + inventory.get(key));
         i++;
       }
