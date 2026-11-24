@@ -1,36 +1,40 @@
 package app;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Receipt{
-  private HashMap<Product,Integer> items = new HashMap<>();
-  private float total = 0;
+public class Receipt {
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
+  private String buyer;
+  private HashMap<String, Item> items;
+  private float total;
+  private String dateOfPurchase;
 
-  public void addItem(Product item, int amount){
-    if(this.items.containsKey(item)){
-      this.items.put(item, this.items.get(item) + amount);
-    }else{
-      this.items.put(item,amount);
+  public Receipt(String buyer, Cart cart) {
+    this.buyer = buyer;
+    this.items = new HashMap<>();
+    for (Map.Entry<String, Item> entry : cart.getItems().entrySet()) {
+      this.items.put(entry.getKey(), new Item(entry.getValue()));
     }
+    this.total = cart.getTotal();
+    this.dateOfPurchase = LocalDateTime.now().format(FORMATTER);
   }
 
-  public void removeItem(Product item){ //i'll change this para string comparison shea instead of product comparison
-    if(this.items.containsKey(item)){
-      this.items.remove(item);
-    }else{
-      System.out.println("Item " + item.getName() + " not in receipt.");
-    }
+  public String getBuyer() {
+    return this.buyer;
   }
 
-  public HashMap<Product, Integer> getItems(){
+  public String getDate() {
+    return this.dateOfPurchase;
+  }
+
+  public float getTotal() {
+    return this.total;
+  }
+
+  public HashMap<String, Item> getItems() {
     return this.items;
-  }
-
-  public float getTotal(){
-    total = 0;
-    for(Product key: items.keySet()){
-      total += items.get(key) * key.getPrice();
-    }
-    return total;
   }
 }
