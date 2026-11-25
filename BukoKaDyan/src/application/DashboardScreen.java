@@ -16,6 +16,7 @@ public class DashboardScreen extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("Dashboard");
             primaryStage.show();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
