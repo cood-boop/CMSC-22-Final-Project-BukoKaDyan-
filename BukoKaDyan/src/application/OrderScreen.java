@@ -52,20 +52,35 @@ public class OrderScreen extends Application {
 			setupScreen(root);
 
 			// 2. Re-run setup whenever NavController swaps the screen root
-			scene.rootProperty().addListener(new ChangeListener<Parent>() {
+			watchScene(scene);
+
+		
+			primaryStage.sceneProperty().addListener(new ChangeListener<Scene>() {
 				@Override
-				public void changed(ObservableValue<? extends Parent> obs, Parent oldRoot, Parent newRoot) {
-					setupScreen(newRoot);
+				public void changed(ObservableValue<? extends Scene> obs, Scene oldScene, Scene newScene) {
+					if (newScene != null) {
+						watchScene(newScene);
+						setupScreen(newScene.getRoot());
+					}
 				}
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	private void watchScene(Scene scene) {
+		scene.rootProperty().addListener(new ChangeListener<Parent>() {
+			@Override
+			public void changed(ObservableValue<? extends Parent> obs, Parent oldRoot, Parent newRoot) {
+				setupScreen(newRoot);
+			}
+		});
+	}
+
+
 	// HELPER FUNCTIONS
-	
+
 	//fixes the screen whenever you switch tabs
 	private void setupScreen(Parent screenRoot) {
 		if (screenRoot == null) {
@@ -156,7 +171,7 @@ public class OrderScreen extends Application {
 		idField.setPromptText("e.g. SALE-001");
 
 		TextField nameField = new TextField();
-		nameField.setPromptText("e.g. Jannah");
+		nameField.setPromptText("e.g. Juan Buko");
 
 		TextField totalField = new TextField();
 		totalField.setPromptText("e.g. 150.00");

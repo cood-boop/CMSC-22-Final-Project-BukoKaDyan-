@@ -81,7 +81,7 @@
       <children>
         <ToolBar id="toolbar" prefHeight="38.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
           <items>
-            <Text fill="#8daa68" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, Manager &lt;name&gt;!">
+            <Text fill="#8daa68" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, Manager!">
               <font>
                 <Font name="Segoe UI Symbol" size="12.0" />
               </font>
