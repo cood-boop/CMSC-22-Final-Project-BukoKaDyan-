@@ -110,21 +110,20 @@
         </ToolBar>
 
         <!-- stays on the right edge when the window is resized -->
-        <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="87.0" styleClass="primaryButton" text="Add New         +" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="77.0" />
+        <Button id="addNewBtn" mnemonicParsing="false" prefHeight="24.0" prefWidth="87.0" styleClass="primaryButton" text="Add New         +" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="77.0" />
 
         <!-- stretches in all directions with the window -->
-        <TableView styleClass="dataTable" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="109.0">
-          <columns>
-            <TableColumn prefWidth="67.0" styleClass="tableColumn" text="Order Id" />
-            <TableColumn prefWidth="97.0" styleClass="tableColumn" text="Customer Name" />
-            <TableColumn prefWidth="48.0" styleClass="tableColumn" text="Status" />
-            <TableColumn prefWidth="59.0" styleClass="tableColumn" text="Date" />
-            <TableColumn prefWidth="146.0" styleClass="tableColumn" text="Address" />
-          </columns>
-          <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-          </columnResizePolicy>
-        </TableView>
+        <TableView id="orderTable" styleClass="dataTable" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="109.0">
+		  <columns>
+		    <TableColumn prefWidth="90.0" styleClass="tableColumn" text="Order Id" />
+		    <TableColumn prefWidth="130.0" styleClass="tableColumn" text="Customer Name" />
+		    <TableColumn prefWidth="110.0" styleClass="tableColumn" text="Date" />
+		    <TableColumn prefWidth="90.0" styleClass="tableColumn" text="Total" />
+		  </columns>
+		  <columnResizePolicy>
+		    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+		  </columnResizePolicy>
+		</TableView>
       </children>
     </AnchorPane>
 
