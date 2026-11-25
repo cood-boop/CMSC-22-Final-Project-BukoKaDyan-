@@ -5,24 +5,39 @@ public class Item {
   private float price;
   private int amount;
 
+  /*
+    For creating new entries per Sale
+  */
   public Item(String name, float price) {
     this.name = name;
     this.price = price;
     this.amount = 0;
   }
 
+  /*
+    For copying items
+  */
   public Item(Item other) {
     this.name = other.name;
     this.price = other.price;
     this.amount = other.amount;
   }
 
+  /*
+    for loading, instantiates a class with
+    specified amount
+  */
   public Item(String name, float price, int amount) {
     this.name = name;
     this.price = price;
     this.amount = Math.max(0, amount);
   }
 
+  /*
+    for updating the amount bought, must be linked
+    to a + and - button for amount of items being ordered
+    will accept positive and negative values
+  */
   public void changeAmount(int change) {
     if (this.amount + change < 0) {
       this.amount = 0;
