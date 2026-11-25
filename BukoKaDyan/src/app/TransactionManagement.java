@@ -18,15 +18,25 @@ public class TransactionManagement {
     this.grossRevenue = 0;
   }
 
+  /*
+    adds an entry to the history
+  */
   public void addReceipt(String id, Receipt receipt) {
     this.transactionHistory.put(id, receipt);
     this.grossRevenue += receipt.getTotal();
   }
 
+  /*
+    finds a specific entry using id
+  */
   public Receipt findById(String id) {
     return this.transactionHistory.get(id);
   }
 
+
+  /*
+    filters the entries based on customer name
+  */
   public HashMap<String, Receipt> nameFilter(String buyerName) {
     HashMap<String, Receipt> filtered = new HashMap<>();
     for (String key : this.transactionHistory.keySet()) {
@@ -38,6 +48,10 @@ public class TransactionManagement {
     return filtered;
   }
 
+
+  /*
+    issues refund to the customer
+  */
   public boolean issueRefund(String id, String product, int amount) {
     if (amount <= 0) return false;
     Receipt receipt = this.findById(id);
