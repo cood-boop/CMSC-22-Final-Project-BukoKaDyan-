@@ -1,4 +1,4 @@
-package application;
+ package application;
  
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +11,14 @@ import javafx.stage.Stage;
 public class NavController {
  
     @FXML protected void goDashboard(ActionEvent e)   { show(e, "DashboardScreen.fxml", "Dashboard"); }
-    @FXML protected void goProducts(ActionEvent e)    { show(e, "InventoryScreen.fxml", "Inventory"); }
-    @FXML protected void goInventory(ActionEvent e)   { show(e, "InventoryScreen.fxml", "Inventory"); }
+    @FXML protected void goProducts(ActionEvent e) {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        new InventoryScreen().start(stage);
+    }
+    @FXML protected void goInventory(ActionEvent e) {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        new InventoryScreen().start(stage);
+    }
     @FXML protected void goAllProducts(ActionEvent e) { show(e, "productView.fxml",     "Product View"); }
     @FXML protected void goOrders(ActionEvent e)      { show(e, "OrderScreen.fxml",     "Order"); }
  
