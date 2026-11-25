@@ -4,13 +4,23 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class InventoryScreen extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+        	//FXML ROOT NODE
             Parent root = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
+            
+            //[NODES]
+            Button saveProductButton = (Button) root.lookup(".primaryButton");
+            
+            
+            //[EVENTS] 
+            
+            //[SETTING UP LAYOUTS
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
             primaryStage.setScene(scene);
