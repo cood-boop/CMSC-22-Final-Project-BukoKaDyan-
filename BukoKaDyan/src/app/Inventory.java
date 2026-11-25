@@ -61,14 +61,20 @@ public class Inventory {
 	}
 	
 	public int getStock(String name) {
-		if(inventory.containsKey(name)) {
-			int stock = inventory.get(name);
-			System.out.println(name + "has amount: " + stock);
-			return stock;
-		}
-		return 0;
+	    return inventory.getOrDefault(name, 0);
 	}
 	
+	public String getStockInfo(String name) {
+	    Product product = database.getByName(name);
+	    if (product == null) {
+	        return "Product not found: " + name;
+	    }
+	    int stock = getStock(product.getName());
+	    return product.getName()
+	            + "\nPrice: " + String.format("%.2f", product.getPrice())
+	            + "\nDescription: " + product.getDescription()
+	            + "\nStock: " + stock + (stock == 0 ? " (out of stock)" : "");
+	}
 	
 	/*
 	 * saveProducts and loadProducts are both file readers and file writers that

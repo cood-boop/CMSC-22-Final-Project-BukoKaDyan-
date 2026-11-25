@@ -105,8 +105,14 @@
         </ToolBar>
 
         <!-- stays on the right edge when the window is resized -->
-        <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="70.0" styleClass="primaryButton" text="Save           &gt;" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="77.0" />
-
+		<HBox spacing="8.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="77.0">
+		  <children>
+		  <Button id="newButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="80.0" styleClass="primaryButton" text="New" />
+		    <Button id="addButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="80.0" styleClass="primaryButton" text="Add" />
+		    <Button id="removeButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="80.0" styleClass="primaryButton" text="Remove" />
+		    <Button id="saveButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="80.0" styleClass="primaryButton" text="Save" />
+		  </children>
+		</HBox>
         <!-- stretches in all directions with the window -->
         <TableView styleClass="dataTable" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="109.0">
           <columns>

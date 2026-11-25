@@ -7,12 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.Serializable;
 
 
 public class ProductDatabase implements Serializable {
-
+	
 	private static final long serialVersionUID = 2L;
 	private String name;
 	private ArrayList<Product> products;
@@ -140,7 +141,6 @@ public class ProductDatabase implements Serializable {
 			//create ObjectOutputStream using the newOutputStream method of Files on our path argument
 			ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(savePath));
 			
-			//write the card database into the stream
 			out.writeObject(this);
 			System.out.println("Saving Complete");
 			//close the file
@@ -150,6 +150,17 @@ public class ProductDatabase implements Serializable {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void saveProductsToFile(Path path) {
+	    try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+	        for (Product p : products) {
+	            writer.write(p.getName() + "|" + p.getPrice() + "|" + p.getDescription().replace("\n", " "));
+	            writer.newLine();
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Could not save products: " + e.getMessage());
+	    }
 	}
 
 	public static ProductDatabase load(Path loadPath) {
