@@ -22,6 +22,11 @@ public class Receipt {
     this.dateOfPurchase = LocalDateTime.now().format(FORMATTER);
   }
 
+  
+  public void addItem() {
+	  
+  }
+  
   public String getBuyer() {
     return this.buyer;
   }

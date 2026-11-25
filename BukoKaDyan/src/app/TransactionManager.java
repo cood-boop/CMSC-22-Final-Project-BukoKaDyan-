@@ -19,10 +19,10 @@ public class TransactionManager{
   }
 
   public void newTransaction(Inventory inventory){
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Enter buyer name:");
+	String name = sc.nextLine();
     Receipt receipt = new Receipt(null, null);
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Enter buyer name:");
-    String name = sc.nextLine();
     ArrayList<Product> productList = new ArrayList<>();
     for (String productName : inventory.getInventory().keySet()) {
         Product product = database.getByName(productName);
