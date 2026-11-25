@@ -1,0 +1,173 @@
+/* ===== Sidebar ===== */
+.sidebar {
+    -fx-background-color: #AFC171;
+}
+ 
+/* Sidebar nav buttons (Dashboard, Products, Orders, Sign out) */
+.buttonDashboard {
+    -fx-background-color: #AFC171;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-text-fill: #4d5c24;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 10px;
+    -fx-font-weight: normal;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 8;
+    -fx-padding: 1 3 1 8;
+}
+ 
+/* hover / pressed (mouse drag) / current page */
+.buttonDashboard:hover {
+    -fx-background-color: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.buttonDashboard.active{
+	-fx-background-color: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 12px;
+}
+
+.buttonDashboard:pressed{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+}
+
+ 
+/* ===== Nav icons: normal ===== */
+.icon-dashboard { -fx-image: url("../Icons/dashboard.png"); }
+.icon-products  { -fx-image: url("../Icons/products.png"); }
+.icon-orders    { -fx-image: url("../Icons/order.png"); }
+ 
+/* ===== Nav icons: selected ===== */
+.buttonDashboard:hover .icon-dashboard,
+.buttonDashboard:pressed .icon-dashboard,
+.buttonDashboard.active .icon-dashboard {
+    -fx-image: url("../Icons/dashboard_selected.png");
+}
+ 
+.buttonDashboard:hover .icon-products,
+.buttonDashboard:pressed .icon-products,
+.buttonDashboard.active .icon-products {
+    -fx-image: url("../Icons/products_selected.png");
+}
+ 
+.buttonDashboard:hover .icon-orders,
+.buttonDashboard:pressed .icon-orders,
+.buttonDashboard.active .icon-orders {
+    -fx-image: url("../Icons/order_selected.png");
+}
+ 
+/* ===== Top toolbar ===== */
+#toolbar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #B5AAAA;
+    -fx-border-width: 0.5;
+}
+ 
+.toolbarIcon {
+    -fx-background-color: #ffffff;
+    -fx-cursor: hand;
+}
+ 
+.toolbarButton {
+	-fx-background-color: #ffffff;
+    -fx-text-fill: #8c8686;
+    -fx-cursor: hand;
+}
+ 
+.toolbarButton:hover {
+	-fx-font-weight: bold;
+	-fx-font-size: 14px;
+    -fx-text-fill: #4d5c24;
+}
+ 
+/* ===== Save / Add New button ===== */
+.primaryButton {
+    -fx-background-color: #72574A;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 10px;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+}
+ 
+.primaryButton:hover {
+    -fx-background-color: #5f4a3e;
+}
+ 
+/* ===== Tables ===== */
+.dataTable {
+    -fx-background-color: #ffffff;
+}
+ 
+/* ===== Product grid (productView.fxml) ===== */
+.productScroll,
+.productScroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+ 
+.productCard {
+    -fx-background-color: #E6EBE5;
+}
+ 
+.productImageBox {
+    -fx-padding: 4;
+}
+ 
+.productInfo {
+    -fx-background-color: #B1C4AF;
+    -fx-padding: 4 6 4 6;
+    -fx-spacing: 1;
+}
+ 
+.productName {
+    -fx-text-fill: #4d5c24;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+}
+ 
+.productPrice {
+    -fx-text-fill: #8c9477;
+    -fx-font-size: 9px;
+}
+ 
+/* ===== Toolbar tab button: page currently selected (Inventory / All Products) ===== */
+.toolbarButton.active,
+.toolbarButton.active:hover {
+    -fx-text-fill: #4d5c24;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+ 
+/* ===== Dashboard ===== */
+.statCard {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5CFCF;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 12 8 12;
+}
+ 
+.statTitle {
+    -fx-text-fill: #4d5c24;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+}
+ 
+.sectionTitle {
+    -fx-text-fill: #4d5c24;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 15px;
+}
+ 
+/* Dashboard stat card: the number under the title */
+.statValue {
+    -fx-text-fill: #4d5c24;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+ 
