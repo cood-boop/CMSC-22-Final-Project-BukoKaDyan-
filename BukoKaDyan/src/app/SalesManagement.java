@@ -23,7 +23,7 @@ public class SalesManagement {
     new sale for assigning saleId and checking if a sale like this already exists
   */
   public String newSale() {
-    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("SALE-yyyyMMddHHmmss");
+    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("'SALE'-yyyyMMddHHmmss");
     String saleId = java.time.LocalDateTime.now().format(formatter);
 
     int suffix = 1;
