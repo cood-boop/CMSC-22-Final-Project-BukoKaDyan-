@@ -14,21 +14,42 @@ import javafx.stage.Stage;
 
 public class NavController {
 
-    // Shared data, loaded once and reused by every screen that extends NavController
-    protected static ProductDatabase db = loadDb();
-    protected static TransactionManagement transactions = loadTransactions();
+    public static boolean isClerk = false;
 
-    @FXML protected void goDashboard(ActionEvent e)   { show(e, "DashboardScreen.fxml", "Dashboard"); }
+    @FXML protected void goDashboard(ActionEvent e) {
+        show(e, "DashboardScreen.fxml", "Dashboard");
+    }
+
     @FXML protected void goProducts(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        new InventoryScreen().start(stage);
+        if (isClerk) {
+            new ClerkInventory().start(stage);
+        } else {
+            new InventoryScreen().start(stage);
+        }
     }
+
     @FXML protected void goInventory(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        new InventoryScreen().start(stage);
+        if (isClerk) {
+            new ClerkInventory().start(stage);
+        } else {
+            new InventoryScreen().start(stage);
+        }
     }
-    @FXML protected void goAllProducts(ActionEvent e) { show(e, "productView.fxml",     "Product View"); }
-    @FXML protected void goOrders(ActionEvent e)      { show(e, "OrderScreen.fxml",     "Order"); }
+
+    @FXML protected void goAllProducts(ActionEvent e) {
+        show(e, "productView.fxml", "Product View");
+    }
+
+    @FXML protected void goOrders(ActionEvent e) {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        if (isClerk) {
+            new ClerkOrders().start(stage);
+        } else {
+            new OrderScreen().start(stage);
+        }
+    }
 
     @FXML protected void signOut(ActionEvent e) {
         ((Stage) ((Node) e.getSource()).getScene().getWindow()).close();
