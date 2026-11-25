@@ -16,98 +16,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane fx:id="logStackPane" prefHeight="720.0" prefWidth="1024.0" styleClass="rootPane" stylesheets="@logIn.css" xmlns="http://javafx.com/javafx/27.0.1.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane fx:id="logStackPane" prefHeight="720.0" prefWidth="1024.0" styleClass="whiteOverlay" stylesheets="@logIn.css">
-         <children>
-            <VBox fx:id="detailsBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="680.0" prefWidth="480.0" spacing="5.0" styleClass="overlay" StackPane.alignment="CENTER_LEFT">
-               <children>
-                  <ImageView fx:id="logo" fitHeight="148.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                     <image>
-                        <Image url="@logo.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="logAccountText" alignment="CENTER" prefHeight="17.0" prefWidth="359.0" text="Log in to your account" textAlignment="CENTER">
-                     <VBox.margin>
-                        <Insets bottom="40.0" top="30.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="emailLabel" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Email Address">
-                     <VBox.margin>
-                        <Insets top="18.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="emailField" maxWidth="1.7976931348623157E308" prefHeight="25.0" />
-                  <Label fx:id="passLabel" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Password">
-                     <VBox.margin>
-                        <Insets top="18.0" />
-                     </VBox.margin>
-                  </Label>
-                  <PasswordField fx:id="passField" maxWidth="1.7976931348623157E308" prefHeight="25.0" />
-                  <HBox fx:id="hboxBelow" prefHeight="25.0" prefWidth="349.0" spacing="7.0">
-                     <VBox.margin>
-                        <Insets top="2.0" />
-                     </VBox.margin>
-                     <children>
-                        <CheckBox fx:id="rememberMe" mnemonicParsing="false" prefHeight="17.0" prefWidth="88.0" text="Remember me?" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Franklin Gothic Book" size="10.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="7.0" />
-                           </HBox.margin>
-                        </CheckBox>
-                        <Hyperlink fx:id="forgotPass" alignment="CENTER_RIGHT" prefHeight="12.0" prefWidth="165.0" text="Forgot your password?">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="75.0" />
-                           </HBox.margin>
-                        </Hyperlink>
-                     </children>
-                  </HBox>
-                  <Button fx:id="logButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" text="Log in">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Separator prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </Separator>
-                  <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="349.0">
-                     <children>
-                        <Text fx:id="noAccount" fill="#72574a" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Text>
-                        <Hyperlink fx:id="createAccountButton" prefHeight="0.0" prefWidth="78.0" text="Sign up now!" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Hyperlink>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets bottom="40.0" left="65.0" right="65.0" top="40.0" />
-               </padding>
-               <StackPane.margin>
-                  <Insets left="45.0" />
-               </StackPane.margin>
-            </VBox>
-         </children>
-      </StackPane>
+      <StackPane fx:id="logStackPane" prefHeight="720.0" prefWidth="1024.0" styleClass="whiteOverlay" stylesheets="@logIn.css" />
       <VBox fx:id="detailsBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="680.0" prefWidth="480.0" spacing="5.0" styleClass="overlay" StackPane.alignment="CENTER_LEFT">
          <children>
             <ImageView fx:id="logo" fitHeight="148.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true" smooth="false">
