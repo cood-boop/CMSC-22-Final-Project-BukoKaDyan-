@@ -25,5 +25,26 @@
 .popupTitle{
 	-fx-font-size: 22px;
 	-fx-font-weight: bold;
+	-fx-text-fill: #72574a;
 	
+}
+
+.loginHeading {
+	-fx-font-size: 24px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #72574a;
+}
+
+.brownLabel {
+	-fx-font-size: 12px;
+	-fx-text-fill: #72574a;
+}
+
+.button {
+	-fx-font-size: 14px;
+	-fx-background-color: #72574a;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-background-radius: 6px;
+	-fx-cursor: hand;
 }

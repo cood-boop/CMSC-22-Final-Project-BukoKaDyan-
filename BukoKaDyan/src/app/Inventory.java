@@ -16,7 +16,7 @@ public class Inventory {
 		this.database = database;
 	}
 
-	public void addStock(String name, int amount) {
+	public void addStock(String name, int amount) {//adds stock to the hashmap
 		Product newStock = database.getByName(name);
 		if(newStock == null) {
 			System.out.println("Product not found!");
@@ -27,7 +27,7 @@ public class Inventory {
 		System.out.println("Added product: " + name + " with amount of " + amount);
 	}
 	
-	public void removeStock(String name, int amount) {
+	public void removeStock(String name, int amount) {//removes stock to the hashmap
 		Product product = database.getByName(name);
 		if (product == null) {
 			System.out.println("Product not found: " + name);
@@ -43,7 +43,7 @@ public class Inventory {
 		System.out.println("Removed " + amount + " of " + product.getName());
 	}
 	
-	public void checkStock() {
+	public void checkStock() {//checks the current stock (basically the whole hashmap)
 		System.out.println("Current stock\n");
 		if (inventory.isEmpty()) {
 			System.out.println("(none)");
@@ -60,7 +60,7 @@ public class Inventory {
 		}
 	}
 	
-	public int getStock(String name) {
+	public int getStock(String name) {//gets the stock of a certain product
 	    return inventory.getOrDefault(name, 0);
 	}
 	
@@ -69,11 +69,17 @@ public class Inventory {
 	    if (product == null) {
 	        return "Product not found: " + name;
 	    }
+
 	    int stock = getStock(product.getName());
+	    String status = "";
+	    if (stock == 0) {
+	        status = " (out of stock)";
+	    }
+
 	    return product.getName()
 	            + "\nPrice: " + String.format("%.2f", product.getPrice())
 	            + "\nDescription: " + product.getDescription()
-	            + "\nStock: " + stock + (stock == 0 ? " (out of stock)" : "");
+	            + "\nStock: " + stock + status;
 	}
 	
 	/*
@@ -145,29 +151,4 @@ public class Inventory {
 	public void setInventory(HashMap<String, Integer> inventory) {
 		this.inventory = inventory;
 	}
-	
-	
-	//default constructor for the time being
-//	public void deleteProduct(String name) {
-//		for (Product key: inventory.keySet()) {
-//			if (name.equals(key.getName())) {
-//				inventory.remove(key);
-//			}
-//		}
-//	}
-//	
-//	public void updateStock (String name, int stock) {
-//		for (Product key: inventory.keySet()) {
-//			if (name.equals(key.getName())) {
-//				inventory.replace(key,stock);
-//			}
-//		}
-//	}
-//	
-//	public void getStock(String name) {
-//        for (HashMap.Entry<Product, Integer> entry : inventory.entrySet()) {
-//        	if(name.equals(entry.getKey().getName())){
-//            System.out.println(entry.getKey().getName() + ", has this amount of stocks left: " + entry.getValue());
-//        }
-//		}
 }

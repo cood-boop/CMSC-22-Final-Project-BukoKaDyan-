@@ -26,21 +26,21 @@
                   <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="logAccountText" alignment="CENTER" prefHeight="17.0" prefWidth="359.0" text="Log in to your account" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="40.0" top="30.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="emailLabel" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Email Address">
+            <Label fx:id="logAccountText" alignment="CENTER" prefHeight="32.0" prefWidth="359.0" styleClass="loginHeading" text="Log in to your account" textAlignment="CENTER">
+			   <VBox.margin>
+			      <Insets bottom="25.0" top="15.0" />
+			   </VBox.margin>
+			</Label>
+			<Label fx:id="emailLabel" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="brownLabel" text="Email Address">	
                <VBox.margin>
                   <Insets top="18.0" />
                </VBox.margin>
             </Label>
             <TextField fx:id="emailField" maxWidth="1.7976931348623157E308" prefHeight="25.0" />
-            <Label fx:id="passLabel" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Password">
+            <Label fx:id="passLabel" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="brownLabel" text="Password">
                <VBox.margin>
                   <Insets top="18.0" />
-               </VBox.margin>
+               </VBox.margin> 
             </Label>
             <PasswordField fx:id="passField" maxWidth="1.7976931348623157E308" prefHeight="25.0" />
             <HBox fx:id="hboxBelow" prefHeight="25.0" prefWidth="349.0" spacing="7.0">
