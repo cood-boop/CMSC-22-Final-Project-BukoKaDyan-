@@ -170,4 +170,20 @@
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
+
+.viewReceiptButton {
+	-fx-background-color: #ffffff;
+}
+
+.viewReceiptButton:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4d5c24;
+}
+
+.viewReceiptButton:pressed {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4d5c24;
+    
+}
+
  
