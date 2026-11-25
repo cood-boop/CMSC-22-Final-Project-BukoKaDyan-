@@ -1,120 +1,60 @@
 package app;
 
-import java.util.HashMap;
+public class Item {
+  private String name;
+  private float price;
+  private int amount;
 
-public class Cart {
-  private HashMap<String, Item> items;
-  private float total;
-  private ProductDatabase db;
-  private Inventory inventory;
-
-  public Cart(ProductDatabase db) {
-    this(db, null);
+  /*
+    For creating new entries per Sale
+  */
+  public Item(String name, float price) {
+    this.name = name;
+    this.price = price;
+    this.amount = 0;
   }
 
-  public Cart(ProductDatabase db, Inventory inventory) {
-    this.db = db;
-    this.inventory = inventory;
-    this.items = new HashMap<>();
-    this.total = 0f;
+  /*
+    For copying items
+  */
+  public Item(Item other) {
+    this.name = other.name;
+    this.price = other.price;
+    this.amount = other.amount;
   }
 
-  private void addItem(String item) {
-    Product found = this.db.getByName(item);
-    if (found != null) {
-      Item product = new Item(found.getName(), found.getPrice());
-      this.items.put(found.getName(), product);
-    }
+  /*
+    for loading, instantiates a class with
+    specified amount
+  */
+  public Item(String name, float price, int amount) {
+    this.name = name;
+    this.price = price;
+    this.amount = Math.max(0, amount);
   }
 
-  public void updateAmount(String item, int change) {
-    if (change == 0) {
-      return;
-    }
-
-    Product found = this.db.getByName(item);
-    if (found == null) {
-      System.out.println("Product not found: " + item);
-      return;
-    }
-    String canonicalName = found.getName();
-
-    if (!this.items.containsKey(canonicalName)) {
-      if (change < 0) {
-        return;
-      }
-      this.addItem(canonicalName);
-    }
-
-    Item current = this.items.get(canonicalName);
-    if (current == null) {
-      return;
-    }
-
-    int effectiveChange = change;
-    if (change > 0 && this.inventory != null) {
-      int available = this.inventory.getStock(canonicalName);
-      if (available <= 0) {
-        System.out.println("Out of stock: " + canonicalName);
-        if (current.getAmount() == 0) {
-          this.items.remove(canonicalName);
-        }
-        return;
-      }
-      if (change > available) {
-        System.out.println("Only " + available + " left for " + canonicalName + "; adding max available.");
-        effectiveChange = available;
-      }
-    } else if (change < 0) {
-      effectiveChange = -Math.min(Math.abs(change), current.getAmount());
-    }
-
-    int before = current.getAmount();
-    current.changeAmount(effectiveChange);
-    int actualDelta = current.getAmount() - before;
-
-    if (actualDelta == 0) {
-      if (current.getAmount() == 0) {
-        this.items.remove(canonicalName);
-      }
-      return;
-    }
-
-    this.total += current.getPrice() * actualDelta;
-
-    if (this.inventory != null) {
-      if (actualDelta > 0) {
-        this.inventory.removeStock(canonicalName, actualDelta);
-      } else {
-        this.inventory.addStock(canonicalName, -actualDelta);
-      }
-    }
-
-    if (current.getAmount() == 0) {
-      this.items.remove(canonicalName);
-    }
-  }
-
-  public void removeItem(String item) {
-    Product found = this.db.getByName(item);
-    String key = (found != null && this.items.containsKey(found.getName())) ? found.getName() : item;
-
-    if (this.items.containsKey(key)) {
-      Item removed = this.items.remove(key);
-      this.total -= removed.getPrice() * removed.getAmount();
-      if (this.inventory != null && removed.getAmount() > 0) {
-        this.inventory.addStock(removed.getName(), removed.getAmount());
-      }
+  /*
+    for updating the amount bought, must be linked
+    to a + and - button for amount of items being ordered
+    will accept positive and negative values
+  */
+  public void changeAmount(int change) {
+    if (this.amount + change < 0) {
+      this.amount = 0;
     } else {
-      System.out.println("Item " + item + " not in cart.");
+      this.amount += change;
     }
   }
 
-  public HashMap<String, Item> getItems() {
-    return this.items;
+  public String getName() {
+    return this.name;
   }
 
-  public float getTotal() {
-    return this.total;
+  public float getPrice() {
+    return this.price;
+  }
+
+  public int getAmount() {
+    return this.amount;
   }
 }
