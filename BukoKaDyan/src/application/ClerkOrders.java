@@ -1,6 +1,6 @@
 package application;
 
-<<<<<<< HEAD
+
 import app.Receipt;
 import app.TransactionManagement;
 import javafx.application.Application;
@@ -118,7 +118,6 @@ public class ClerkOrders extends Application {
 
 		tableRows = FXCollections.observableArrayList(transactionManagement.getTransactionHistory().entrySet());
 		orderTable.setItems(tableRows);
-
 		orderTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -165,40 +164,3 @@ public class ClerkOrders extends Application {
 		launch(args);
 	}
 }
-=======
-import javafx.application.Application;
-import app.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class DashboardScreen extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("ClerkOrders.fxml"));
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Orders");
-            primaryStage.show();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-}package state;
-
-public class ClerkOrders {
-
-	public ClerkOrders() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
->>>>>>> branch 'main' of https://github.com/cood-boop/CMSC-22-Final-Project-BukoKaDyan-

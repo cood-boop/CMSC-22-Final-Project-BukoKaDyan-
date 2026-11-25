@@ -1,6 +1,5 @@
 package app;
 
-import application.Main;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javafx.application.Application;

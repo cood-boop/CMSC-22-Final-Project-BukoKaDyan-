@@ -1,6 +1,5 @@
 package application;
 
-<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -102,40 +101,4 @@ public class ClerkInventory extends Application {
         launch(args);
     }
 }
-=======
-import javafx.application.Application;
-import app.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-public class DashboardScreen extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("ClerkInventory.fxml"));
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Inventory");
-            primaryStage.show();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-}package state;
-
-public class ClerkOrders {
-
-	public ClerkOrders() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
->>>>>>> branch 'main' of https://github.com/cood-boop/CMSC-22-Final-Project-BukoKaDyan-
