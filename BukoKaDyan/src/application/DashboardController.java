@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import app.Item;
+import app.ProductDatabase;
 import app.Receipt;
+import app.TransactionManagement;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -27,7 +29,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class DashboardController extends NavController {
-
+    private static ProductDatabase database;
+    private static TransactionManagement transactions;
     private static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
@@ -38,7 +41,7 @@ public class DashboardController extends NavController {
     @FXML
     private void initialize() {
         setMonthlySales(transactions.getGrossRevenue());
-        setTotalProducts(db.getProducts().size());
+        setTotalProducts(database.getProducts().size());
 
         transactionList.setPlaceholder(new Label("No transactions yet"));
         transactionList.setCellFactory(lv -> new TransactionCell());
