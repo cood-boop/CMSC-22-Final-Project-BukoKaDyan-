@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.function.Consumer;
-
 import app.Receipt;
 import app.TransactionManagement;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,12 +37,10 @@ public class OrderScreen extends Application {
 	private ObservableList<java.util.Map.Entry<String, Receipt>> tableRows;
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("OrderScreen.fxml"));
 			transactionManagement = new TransactionManagement();
-			transactionManagement.load();
 
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -50,80 +48,102 @@ public class OrderScreen extends Application {
 			primaryStage.setTitle("Order");
 			primaryStage.show();
 
-			// 1. Lookup nodes
-			Button addNewBtn = (Button) root.lookup("#addNewBtn");
-			TableView<java.util.Map.Entry<String, Receipt>> orderTable =
-					(TableView<java.util.Map.Entry<String, Receipt>>) root.lookup("#orderTable");
+			// 1. Run setup on initial Orders screen
+			setupScreen(root);
 
-			// 2. Grab the 4 columns from FXML
-			TableColumn<java.util.Map.Entry<String, Receipt>, String> idCol =
-					(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(0);
-			TableColumn<java.util.Map.Entry<String, Receipt>, String> nameCol =
-					(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(1);
-			TableColumn<java.util.Map.Entry<String, Receipt>, String> dateCol =
-					(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(2);
-			TableColumn<java.util.Map.Entry<String, Receipt>, String> totalCol =
-					(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(3);
-
-			// 3. Connect each column to Map.Entry<String, Receipt>
-			idCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
+			// 2. Re-run setup whenever NavController swaps the screen root
+			scene.rootProperty().addListener(new ChangeListener<Parent>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
-					return new SimpleStringProperty(cell.getValue().getKey());
+				public void changed(ObservableValue<? extends Parent> obs, Parent oldRoot, Parent newRoot) {
+					setupScreen(newRoot);
 				}
 			});
-
-			nameCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
-					return new SimpleStringProperty(cell.getValue().getValue().getBuyer());
-				}
-			});
-
-			dateCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
-					return new SimpleStringProperty(cell.getValue().getValue().getDate());
-				}
-			});
-
-			totalCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
-					return new SimpleStringProperty(String.format("%.2f", cell.getValue().getValue().getTotal()));
-				}
-			});
-
-			// 4. Load existing receipts into the TableView
-			tableRows = FXCollections.observableArrayList(transactionManagement.getTransactionHistory().entrySet());
-			orderTable.setItems(tableRows);
-
-			// [EVENT BUTTONS]
-			addNewBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					showAddReceiptPopup();
-				}
-			});
-
-			orderTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event) {
-					java.util.Map.Entry<String, Receipt> selectedRow = orderTable.getSelectionModel().getSelectedItem();
-					if (selectedRow != null) {
-						showReceiptItemsPopup(selectedRow.getKey(), selectedRow.getValue());
-					}
-				}
-			});
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	// HELPER FUNCTIONS
+	
+	//fixes the screen whenever you switch tabs
+	private void setupScreen(Parent screenRoot) {
+		if (screenRoot == null) {
+			return;
+		}
+
+		screenRoot.applyCss();
+
+		Button addNewBtn = (Button) screenRoot.lookup("#addNewBtn");
+		TableView<java.util.Map.Entry<String, Receipt>> orderTable =
+				(TableView<java.util.Map.Entry<String, Receipt>>) screenRoot.lookup("#orderTable");
+
+		// If we switched to Dashboard or Products, #orderTable won't be there—stop safely
+		if (orderTable == null || addNewBtn == null) {
+			return;
+		}
+
+		// Reload saved receipts every time Orders is shown
+		transactionManagement.load();
+
+		TableColumn<java.util.Map.Entry<String, Receipt>, String> idCol =
+				(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(0);
+		TableColumn<java.util.Map.Entry<String, Receipt>, String> nameCol =
+				(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(1);
+		TableColumn<java.util.Map.Entry<String, Receipt>, String> dateCol =
+				(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(2);
+		TableColumn<java.util.Map.Entry<String, Receipt>, String> totalCol =
+				(TableColumn<java.util.Map.Entry<String, Receipt>, String>) orderTable.getColumns().get(3);
+
+		idCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
+				return new SimpleStringProperty(cell.getValue().getKey());
+			}
+		});
+
+		nameCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
+				return new SimpleStringProperty(cell.getValue().getValue().getBuyer());
+			}
+		});
+
+		dateCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
+				return new SimpleStringProperty(cell.getValue().getValue().getDate());
+			}
+		});
+
+		totalCol.setCellValueFactory(new Callback<CellDataFeatures<java.util.Map.Entry<String, Receipt>, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<java.util.Map.Entry<String, Receipt>, String> cell) {
+				return new SimpleStringProperty(String.format("%.2f", cell.getValue().getValue().getTotal()));
+			}
+		});
+
+		tableRows = FXCollections.observableArrayList(transactionManagement.getTransactionHistory().entrySet());
+		orderTable.setItems(tableRows);
+
+		addNewBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				showAddReceiptPopup();
+			}
+		});
+
+		orderTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				java.util.Map.Entry<String, Receipt> selectedRow = orderTable.getSelectionModel().getSelectedItem();
+				if (selectedRow != null) {
+					showReceiptItemsPopup(selectedRow.getKey(), selectedRow.getValue());
+				}
+			}
+		});
+	}
+
 	private void showAddReceiptPopup() {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.setTitle("Add New Order");
@@ -170,7 +190,6 @@ public class OrderScreen extends Application {
 					transactionManagement.addReceipt(id, newReceipt);
 					transactionManagement.save();
 
-					// Refresh the TableView right away!
 					tableRows.setAll(transactionManagement.getTransactionHistory().entrySet());
 				}
 			}
@@ -183,7 +202,6 @@ public class OrderScreen extends Application {
 		dialog.setHeaderText("Items bought by " + receipt.getBuyer() + " (Date: " + receipt.getDate() + ")");
 		dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
-		// ListView to display each item's name, quantity, and price
 		javafx.scene.control.ListView<String> itemsList = new javafx.scene.control.ListView<>();
 		itemsList.setPrefSize(350, 200);
 
@@ -199,7 +217,6 @@ public class OrderScreen extends Application {
 			}
 		}
 
-		// Show total at the bottom of the popup
 		Label totalLabel = new Label("Total: " + String.format("%.2f", receipt.getTotal()));
 
 		javafx.scene.layout.VBox content = new javafx.scene.layout.VBox(10);
