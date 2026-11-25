@@ -80,7 +80,9 @@ public class InventoryScreen extends Application {
 
             for (String name : inventory.getInventory().keySet()) {
                 Product p = database.getByName(name);
-                if (p != null) table.getItems().add(p);
+                if (p != null) {
+                    table.getItems().add(p);
+                }
             }
 
             // double-click a row to see that product's stock info
@@ -115,6 +117,8 @@ public class InventoryScreen extends Application {
                 dialog.showAndWait().ifPresent(selectedName -> {
                     Product match = database.getByName(selectedName);
                     if (match != null) {
+                        inventory.getInventory().putIfAbsent(match.getName(), 0);
+                        inventory.saveProducts(STOCK_FILE);
                         table.getItems().add(match);
                         table.getSelectionModel().select(match);
                     }

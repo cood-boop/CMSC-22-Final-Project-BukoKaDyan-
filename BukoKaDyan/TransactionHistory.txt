@@ -1,8 +1,2 @@
-<<<<<<< HEAD
 275.0
-SALE-20261125235852|Juan Dela Cruz|23:58 25-11-2026|310.0|Buko Pie|120.0|2|Buko Juice|35.0|1
-=======
-370.0
-3456|Louise|02:47 26-11-2026|220.0
-12345|Jannah|01:43 26-11-2026|150.0
->>>>>>> branch 'main' of https://github.com/cood-boop/CMSC-22-Final-Project-BukoKaDyan-
+SALE-20261126045014|Juan Dela Cruz|04:50 26-11-2026|310.0|Buko Pie|120.0|2|Buko Juice|35.0|1
