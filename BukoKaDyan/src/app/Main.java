@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import users.Role;
 import users.User;
 import users.UserDatabase;
+import application.ClerkOrders;
+import application.NavController;
 
 public class Main extends Application {
 
@@ -82,9 +84,11 @@ public class Main extends Application {
         try {
           openAuthorizedEntry(stage, currentUser);
         } catch (Exception ex) {
-          ex.printStackTrace();
-          showAlert(AlertType.ERROR, "Could not open screen: " + ex.getMessage());
-        }
+        	  ex.printStackTrace();
+        	  Throwable root = ex;
+        	  while (root.getCause() != null) root = root.getCause();
+        	  showAlert(AlertType.ERROR, root.getClass().getSimpleName() + ": " + root.getMessage());
+        	}
       });
     }
 
@@ -103,31 +107,28 @@ public class Main extends Application {
   }
 
   private void openAuthorizedEntry(Stage stage, User user) throws Exception {
-    String fxml;
-    String title;
+	    if (user.getRole() == Role.MANAGER) {
+	      NavController.isClerk = false;
+	      Parent root = FXMLLoader.load(Main.class.getResource("/application/DashboardScreen.fxml"));
+	      Scene scene = new Scene(root);
+	      if (Main.class.getResource("/application/style.css") != null) {
+	        scene.getStylesheets().add(Main.class.getResource("/application/style.css").toExternalForm());
+	      }
+	      stage.setTitle("BukoKaDyan - Manager (" + user.getEmail() + ")");
+	      stage.setScene(scene);
+	      stage.setMaximized(true);
+	      stage.show();
 
-    if (user.getRole() == Role.MANAGER) {
-      fxml = "/application/DashboardScreen.fxml";
-      title = "BukoKaDyan - Manager (" + user.getEmail() + ")";
-    } else if (user.getRole() == Role.CLERK) {
-      fxml = "/application/OrderScreen.fxml";
-      title = "BukoKaDyan - Clerk (" + user.getEmail() + ")";
-    } else {
-      showAlert(AlertType.ERROR, "Unrecognized user role.");
-      return;
-    }
+	    } else if (user.getRole() == Role.CLERK) {
+	      NavController.isClerk = true;
+	      new ClerkOrders().start(stage);
+	      stage.setTitle("BukoKaDyan - Clerk (" + user.getEmail() + ")");
+	      stage.setMaximized(true);
 
-    Parent root = FXMLLoader.load(Main.class.getResource(fxml));
-    Scene scene = new Scene(root);
-    if (Main.class.getResource("/application/style.css") != null) {
-      scene.getStylesheets().add(Main.class.getResource("/application/style.css").toExternalForm());
-    }
-
-    stage.setTitle(title);
-    stage.setScene(scene);
-    stage.setMaximized(true);
-    stage.show();
-  }
+	    } else {
+	      showAlert(AlertType.ERROR, "Unrecognized user role.");
+	    }
+	  }
 
   private void createAccountPopUp(Stage ownerStage) {
     Stage createdStage = new Stage();

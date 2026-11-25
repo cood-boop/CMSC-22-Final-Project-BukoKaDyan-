@@ -27,6 +27,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DashboardController extends NavController {
     private static ProductDatabase database;
@@ -40,6 +43,19 @@ public class DashboardController extends NavController {
 
     @FXML
     private void initialize() {
+        if (transactions == null) {
+            transactions = new TransactionManagement();
+        }
+        transactions.load();
+
+        if (database == null) {
+            database = new ProductDatabase("Main");
+            Path productFile = Paths.get("src/storage/products.txt");
+            if (Files.exists(productFile)) {
+                database.readProductsFromFile(productFile);
+            }
+        }
+
         setMonthlySales(transactions.getGrossRevenue());
         setTotalProducts(database.getProducts().size());
 
