@@ -17,6 +17,12 @@ public class Item {
     this.amount = other.amount;
   }
 
+  public Item(String name, float price, int amount) {
+    this.name = name;
+    this.price = price;
+    this.amount = Math.max(0, amount);
+  }
+
   public void changeAmount(int change) {
     if (this.amount + change < 0) {
       this.amount = 0;

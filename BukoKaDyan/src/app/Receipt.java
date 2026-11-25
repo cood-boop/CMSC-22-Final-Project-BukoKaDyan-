@@ -22,6 +22,13 @@ public class Receipt {
     this.dateOfPurchase = LocalDateTime.now().format(FORMATTER);
   }
 
+  public Receipt(String buyer, float total, String dateOfPurchase, HashMap<String, Item> items) {
+    this.buyer = buyer;
+    this.total = total;
+    this.dateOfPurchase = dateOfPurchase;
+    this.items = (items != null) ? items : new HashMap<>();
+  }
+
   public String getBuyer() {
     return this.buyer;
   }
