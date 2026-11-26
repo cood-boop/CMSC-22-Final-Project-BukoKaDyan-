@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class DashboardController extends NavController {
+    //initializations
     private static ProductDatabase database;
     private static TransactionManagement transactions;
     private static final DateTimeFormatter DATE_FORMAT =
@@ -40,14 +41,14 @@ public class DashboardController extends NavController {
     @FXML private Label monthlySalesLabel;
     @FXML private Label totalProductsLabel;
     @FXML private ListView<Map.Entry<String, Receipt>> transactionList;
-
+    //the file makes sure that the files will exist either way even if it was deleted
     @FXML
     private void initialize() {
         if (transactions == null) {
             transactions = new TransactionManagement();
         }
         transactions.load();
-
+        
         if (database == null) {
             database = new ProductDatabase("Main");
             Path productFile = Paths.get("src/storage/products.txt");
@@ -55,7 +56,7 @@ public class DashboardController extends NavController {
                 database.readProductsFromFile(productFile);
             }
         }
-
+        
         setMonthlySales(transactions.getGrossRevenue());
         setTotalProducts(database.getProducts().size());
 
@@ -89,7 +90,7 @@ public class DashboardController extends NavController {
         }
         return net;
     }
-
+    //SETTER functions for better OOP DESIGN
     public void setMonthlySales(double amount) {
         monthlySalesLabel.setText(String.format("₱ %,.2f", amount));
     }
@@ -98,6 +99,7 @@ public class DashboardController extends NavController {
         totalProductsLabel.setText(String.valueOf(count));
     }
 
+    //for every row in a row in the sales history we only show the order id and amount and a view receipt btton
     private HBox summaryRow(String label, String value, boolean bold) {
         Label l = new Label(label);
         Label v = new Label(value);
