@@ -1,2 +1,3 @@
-Buong buko by the kilo|0
-Buko meat|55
+Buong buko by the kilo|20
+Coconut milk|100
+Buko meat|5

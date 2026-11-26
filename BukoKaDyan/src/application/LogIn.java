@@ -28,7 +28,7 @@ public class LogIn extends Application {
 
 	// ADDED: Backend database reference and save file path
 	private UserDatabase userDatabase;
-	private final Path userDbPath = Paths.get("src/storage/users.dat");
+	private final Path userDbPath = Paths.get("users.dat");
 
 	@Override
 	public void start(Stage logStage) throws Exception {
