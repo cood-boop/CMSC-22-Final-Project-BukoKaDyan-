@@ -99,7 +99,7 @@ public class DashboardController extends NavController {
         totalProductsLabel.setText(String.valueOf(count));
     }
 
-    //for every row in a row in the sales history we only show the order id and amount and a view receipt btton
+    //for the total amount, the refunded amount(possibly) and the net total
     private HBox summaryRow(String label, String value, boolean bold) {
         Label l = new Label(label);
         Label v = new Label(value);
