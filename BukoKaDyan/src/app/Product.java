@@ -2,8 +2,8 @@ package app;
 
 import java.io.Serializable;
 
-public class Product implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Product implements Serializable{//the main product class contains all the information regarding the product
+	private static final long serialVersionUID = 1L; //is serializable as we are saving these information on text files
 	private String name;
 	private float price;
 	private String description;
@@ -19,7 +19,7 @@ public class Product implements Serializable{
 	    System.out.printf("%-30s | %10.2f | %s%n", name, price, description);
 	}
 
-
+	//the next few methods are just the getters and setters for the attribute
 	public String getName() {
 		return name;
 	}

@@ -93,7 +93,7 @@ public class InventoryScreen extends Application {
                 }
             });
             
-            newButton.setOnAction(e -> {
+            newButton.setOnAction(e -> {//uses a dropdown menu adds a product based on the product database to add a stock of product
                 if (database.getProducts().isEmpty()) {
                     showAlert(AlertType.WARNING, "No products loaded in database.");
                     return;
@@ -125,7 +125,7 @@ public class InventoryScreen extends Application {
                 });
             });
             
-            addButton.setOnAction(e -> {
+            addButton.setOnAction(e -> {//adds stock of a newly added product to the inventory
                 Product p = table.getSelectionModel().getSelectedItem();
                 if (p == null) {
                     showAlert(AlertType.WARNING, "Select a product first.");
@@ -138,7 +138,7 @@ public class InventoryScreen extends Application {
                 table.refresh();
             });
 
-            removeButton.setOnAction(e -> {
+            removeButton.setOnAction(e -> {//removes any stock of the product of that inventory
                 Product p = table.getSelectionModel().getSelectedItem();
                 if (p == null) {
                     showAlert(AlertType.WARNING, "Select a product first.");
@@ -156,7 +156,7 @@ public class InventoryScreen extends Application {
                 table.refresh();
             });
 
-            saveButton.setOnAction(e -> {
+            saveButton.setOnAction(e -> {//saves the stock to a text file along with the products database
                 inventory.saveProducts(STOCK_FILE);
                 database.saveProductsToFile(PRODUCT_FILE);
                 showAlert(AlertType.INFORMATION, "Saved.");
@@ -167,7 +167,7 @@ public class InventoryScreen extends Application {
         }
     }
 
-    private Integer askAmount(String title, String productName) {
+    private Integer askAmount(String title, String productName) {//a pop-up that asks for the amount of stock to add
         TextInputDialog dialog = new TextInputDialog("1");
         dialog.setTitle(title);
         dialog.setHeaderText(null);
@@ -187,7 +187,7 @@ public class InventoryScreen extends Application {
         }
     }
     
-    private void showAlert(AlertType type, String message) {
+    private void showAlert(AlertType type, String message) {//alert messages method constructs the alerts popup for errors
         Alert alert = new Alert(type);
         alert.setHeaderText(null);
         alert.setContentText(message);

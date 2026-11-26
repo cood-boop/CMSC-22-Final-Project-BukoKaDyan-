@@ -64,7 +64,7 @@ public class Inventory {
 	    return inventory.getOrDefault(name, 0);
 	}
 	
-	public String getStockInfo(String name) {
+	public String getStockInfo(String name) {//returns the info of a certain products stock, this is just a more detailed one 
 	    Product product = database.getByName(name);
 	    if (product == null) {
 	        return "Product not found: " + name;
@@ -103,7 +103,7 @@ public class Inventory {
 	    }
 	}
 	
-	public void loadProducts(Path loadPath) {
+	public void loadProducts(Path loadPath) {//loads the products from the load path
 		System.out.println("Loading Stock...");
 		try {
 			List<String> lines = Files.readAllLines(loadPath);
@@ -135,7 +135,8 @@ public class Inventory {
 			System.out.println("Could not load/find the stock in: " + loadPath);
 		}
 	}
-
+	
+	//next few methods are just the getters and setters for the attributes
 	public ProductDatabase getDatabase() {
 		return database;
 	}

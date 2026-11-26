@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.Serializable;
 
 
-public class ProductDatabase implements Serializable {
+public class ProductDatabase implements Serializable {//uses serializable like the persistence exercise
 	
 	private static final long serialVersionUID = 2L;
 	private String name;
@@ -40,13 +40,13 @@ public class ProductDatabase implements Serializable {
 		this.name = name;
 	}
 	
-	public void addProduct(String name, float price, String description) {
+	public void addProduct(String name, float price, String description) {//adds the product to the arraylist
 		Product productToAdd = new Product(name,price,description);
 		products.add(productToAdd);
 		return;
 	}
 	
-	public void removeProduct(String name) {
+	public void removeProduct(String name) {//removes the product
 		Product productToRemove = getByName(name);
 		if(productToRemove == null) {
 			System.out.println("Product not found!");
@@ -56,7 +56,7 @@ public class ProductDatabase implements Serializable {
 		products.remove(productToRemove);
 	}
 	
-	public void updateName(String oldName,String newName) {
+	public void updateName(String oldName,String newName) {//the next 3 methods are just update functions this one updates the name
 		Product productToUpdate = getByName(oldName);
 		if(productToUpdate == null) {
 			System.out.println("Product not found");
@@ -70,7 +70,7 @@ public class ProductDatabase implements Serializable {
 		System.out.println("Renamed " + oldName + "to "+ newName);
 	}
 	
-	public void updatePrice(String name, float price) {
+	public void updatePrice(String name, float price) {//this updates the price
 		Product productToUpdate = getByName(name);
 		if(productToUpdate == null) {
 			System.out.println("Product not found");
@@ -79,7 +79,7 @@ public class ProductDatabase implements Serializable {
 		productToUpdate.setPrice(price);
 	}
 	
-	public void updateDescription(String name, String description) {
+	public void updateDescription(String name, String description) {//this updates the description
 		Product productToUpdate = getByName(name);
 		if(productToUpdate == null) {
 			System.out.println("Product not found");
@@ -89,7 +89,7 @@ public class ProductDatabase implements Serializable {
 	}
 	
 	
-	public Product getByName(String productName) {//finds the product
+	public Product getByName(String productName) {//finds the product using its name
 		boolean found = false;
 		for (int i = 0; i<products.size(); i++) {
 			if (products.get(i).getName().equals(productName)) {
@@ -121,7 +121,7 @@ public class ProductDatabase implements Serializable {
 		}
 	}
 
-	public void viewAllProducts() {
+	public void viewAllProducts() {//views all the products
 		System.out.println("All products in the system\n");
 		if (products.isEmpty()) {
 			System.out.println("(none)");
@@ -133,7 +133,7 @@ public class ProductDatabase implements Serializable {
 	}
 
 
-	public void save(Path savePath) {
+	public void save(Path savePath) {//saves the class to the stream
 		//create the file first if it doesn't exist (go to catch if it already exists)
 		System.out.println("Saving.....");
 		//serializer
@@ -152,7 +152,7 @@ public class ProductDatabase implements Serializable {
 		
 	}
 	
-	public void saveProductsToFile(Path path) {
+	public void saveProductsToFile(Path path) {//saves the product to a text file
 	    try (BufferedWriter writer = Files.newBufferedWriter(path)) {
 	        for (Product p : products) {
 	            writer.write(p.getName() + "|" + p.getPrice() + "|" + p.getDescription().replace("\n", " "));
@@ -163,7 +163,7 @@ public class ProductDatabase implements Serializable {
 	    }
 	}
 
-	public static ProductDatabase load(Path loadPath) {
+	public static ProductDatabase load(Path loadPath) {//loads the class
 		System.out.println("Loading.......");
 		ProductDatabase database;
 		
