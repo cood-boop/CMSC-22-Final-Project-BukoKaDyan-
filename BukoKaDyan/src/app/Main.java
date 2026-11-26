@@ -22,6 +22,7 @@ import users.User;
 import users.UserDatabase;
 import application.ClerkOrders;
 import application.NavController;
+import application.OrderScreen;
 
 public class Main extends Application {
 
@@ -121,7 +122,7 @@ public class Main extends Application {
 
 	    } else if (user.getRole() == Role.CLERK) {
 	      NavController.isClerk = true;
-	      new ClerkOrders().start(stage);
+          new OrderScreen().start(stage);
 	      stage.setTitle("BukoKaDyan - Clerk (" + user.getEmail() + ")");
 	      stage.setMaximized(true);
 

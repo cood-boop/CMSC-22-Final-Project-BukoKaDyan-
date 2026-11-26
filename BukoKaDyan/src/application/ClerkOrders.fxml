@@ -109,6 +109,8 @@
           </items>
         </ToolBar>
 
+
+       <Button id="addNewBtn" mnemonicParsing="false" prefHeight="24.0" prefWidth="87.0" styleClass="primaryButton" text="Add New         +" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="77.0" />
         <!-- stretches in all directions with the window -->
         <TableView id="orderTable" styleClass="dataTable" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="77.0">
           <columns>

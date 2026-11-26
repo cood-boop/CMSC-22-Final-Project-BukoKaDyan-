@@ -44,11 +44,7 @@ public class NavController {
 
     @FXML protected void goOrders(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        if (isClerk) {
-            new ClerkOrders().start(stage);
-        } else {
-            new OrderScreen().start(stage);
-        }
+        new OrderScreen().start(stage);
     }
 
     @FXML protected void signOut(ActionEvent e) {

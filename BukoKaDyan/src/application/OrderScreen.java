@@ -218,7 +218,7 @@ public class OrderScreen extends Application {
 		dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
 		javafx.scene.control.ListView<String> itemsList = new javafx.scene.control.ListView<>();
-		itemsList.setPrefSize(350, 200);
+		itemsList.setPrefSize(1080, 720);
 
 		if (receipt.getItems() == null || receipt.getItems().isEmpty()) {
 			itemsList.getItems().add("No items recorded for this receipt.");
